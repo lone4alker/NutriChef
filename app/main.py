@@ -1,11 +1,16 @@
 import streamlit as st
+import os
 from streamlit_elements import elements, mui, dashboard, nivo
 from google import genai
+from dotenv import load_dotenv
 import prompts as pr
-import random
 import json
 
-client = genai.Client(api_key="YOUR_API_KEY")  # Replace with your actual API key
+# Load environment variables
+load_dotenv() 
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")  
+client = genai.Client(api_key=GEMINI_API_KEY) 
 
 st.set_page_config(page_title="NutriChef", layout="wide")
 
@@ -22,8 +27,8 @@ if "user_data" not in st.session_state:
     }
 
 # Logo
-full_logo= "images/full_logo.png"
-sidebar_logo= "images/logo.png"
+full_logo= "../images/full_logo.png"
+sidebar_logo= "../images/logo.png"
 
 st.logo( image=full_logo, size="large",icon_image=sidebar_logo)
 st.markdown(
