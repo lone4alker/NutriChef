@@ -132,18 +132,12 @@ st.markdown("""
     button::before {
         content: "";
         position: absolute;
-        top: 0;
-        left: 0;
         height: 100%;
         width: 0;
-        border-radius: 15px;
+        border-radius: 10px;
         background-color: #212121;
         z-index: -1;
         transition: all 250ms;
-    }
-
-    button:hover {
-        color: #e8e8e8;
     }
 
     button:hover::before {
@@ -153,7 +147,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 cols = st.columns(len(diet_goals))
-
 for i, goal in enumerate(diet_goals):
     btn_class = "selected-button" if goal == st.session_state.selected_goal else "default-button"
 
