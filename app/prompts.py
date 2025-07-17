@@ -1,4 +1,4 @@
-def create_meal_recipe_prompt(meal_type, search_query, diet_goal, course_type, est_protein, est_carbs, est_fats, total_calories, meals_per_day, allergies):
+def create_meal_recipe_prompt(meal_type, search_query, diet_goal, cuisine_type, dietary_type, est_protein, est_carbs, est_fats, total_calories, meals_per_day, allergies):
     # Base calorie distribution hierarchy
     base_distribution = {
         "Dinner": 0.35,  # 35% of total calories
@@ -42,7 +42,7 @@ def create_meal_recipe_prompt(meal_type, search_query, diet_goal, course_type, e
     The recipe must strictly adhere to the following requirements:
 
     1. Course Type:
-       - The recipe must be suitable for a {course_type} course.
+       - The recipe should be a {dietary_type} dish from {cuisine_type} cuisine, suitable as a complete course.
 
     2. Nutrition Values:
        - Provide the total nutrition values for the entire recipe.

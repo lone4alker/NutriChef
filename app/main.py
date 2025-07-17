@@ -21,7 +21,8 @@ if "user_data" not in st.session_state:
         "age": 20,
         "height": 175,
         "weight": 70,
-        "course_type": "Anything",
+        "cuisine_type": "Anything",
+        "dietary_type": "Anything",
         "activity_level": "Sedentary (Little to no exercise)",
         "allergies": ""
     }
@@ -45,8 +46,6 @@ st.markdown(
 
 # Sidebar for user input
 with st.sidebar:
-    st.title("NutriChef - Your Personalized Meal Planner")
-
     st.header("User Details")
 
     gender = st.selectbox(
@@ -73,10 +72,18 @@ with st.sidebar:
         value=st.session_state.user_data["weight"]
     )
 
-    course_type = st.selectbox(
-        "Course Type", 
+    # Cuisine Type Selectbox
+    cuisine_type = st.selectbox(
+        "Cuisine Type",
+        ["Anything", "Indian", "Chinese", "Italian", "Mexican", "Thai", "American", "Middle Eastern"],
+        index=["Anything", "Indian", "Chinese", "Italian", "Mexican", "Thai", "American", "Middle Eastern"].index((st.session_state.user_data["cuisine_type"])
+        )
+    )
+
+    dietary_type = st.selectbox(
+        "Dietary Type", 
         ["Anything", "Vegetarian", "Non-Vegatarian", "Vegan"],
-        index=["Anything", "Vegetarian", "Non-Vegatarian", "Paleo", "Vegan"].index(st.session_state.user_data["course_type"]) 
+        index=["Anything", "Vegetarian", "Non-Vegatarian", "Paleo", "Vegan"].index(st.session_state.user_data["dietary_type"]) 
     )
 
     activity_options = [
@@ -105,6 +112,8 @@ with st.sidebar:
         allergy_list = [allergy.strip() for allergy in allergies.split(",") if allergy.strip()]
         if allergy_list:
             st.write(f"**Your Allergies:** {', '.join(allergy_list)}")
+    
+    st.button("Login")
     
 # Main page 
 st.write("## Welcome to NutriChef! Please enter your details in the sidebar to generate a personalized meal plan.")
@@ -237,7 +246,8 @@ if client:
                     meal_type=meal,
                     search_query=search_query,
                     diet_goal=diet_goal,
-                    course_type=course_type,
+                    cuisine_type=cuisine_type,
+                    dietary_type=dietary_type,
                     est_protein=est_protein,
                     est_carbs=est_carbs,
                     est_fats=est_fats,
